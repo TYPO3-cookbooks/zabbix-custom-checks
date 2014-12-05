@@ -1,5 +1,8 @@
 # Zabbix configuration for running checks without password
 Cmnd_Alias ZABBIX_CMD_REDISCLI = /usr/bin/redis-cli info
 
+# Disable syslog entries for ZABBIX_CMD_REDISCLI
+Defaults!ZABBIX_CMD_REDISCLI !syslog
+
 # ZABBIX special privileges
 zabbix ALL=NOPASSWD: ZABBIX_CMD_REDISCLI

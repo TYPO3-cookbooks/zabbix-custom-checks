@@ -1,0 +1,8 @@
+# Zabbix configuration for running checks without password
+Cmnd_Alias ZABBIX_CMD_HWRAID_HP_SMARTARRAY = /usr/sbin/cciss_vol_status
+
+# Disable syslog entries for ZABBIX_CMD_HWRAID_HP_SMARTARRAY
+Defaults!ZABBIX_CMD_HWRAID_HP_SMARTARRAY !syslog
+
+# ZABBIX special privileges
+zabbix ALL=NOPASSWD: ZABBIX_CMD_HWRAID_HP_SMARTARRAY

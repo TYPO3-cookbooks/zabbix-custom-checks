@@ -1,0 +1,1 @@
+UserParameter=custom.hwraid.status[*],sudo /usr/sbin/arcconf GETCONFIG $1 AD | grep "Controller Status" | awk '{print $$4}'

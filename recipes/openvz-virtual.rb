@@ -8,6 +8,7 @@
 #
 
 include_recipe "zabbix-custom-checks::default"
+include_recipe "sudo"
 
 template "#{node.zabbix.agent.include_dir}/openvz-virtual.conf" do
 	source "openvz/virtual/zabbix.conf.erb"

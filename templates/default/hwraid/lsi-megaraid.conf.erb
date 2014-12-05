@@ -1,0 +1,1 @@
+UserParameter=custom.hwraid.status[*],sudo /usr/sbin/megasasctl | grep "^$1" | awk '{ print $$6}'

@@ -1,0 +1,8 @@
+# Zabbix configuration for running checks without password
+Cmnd_Alias ZABBIX_CMD_PDNS = <%= node.zabbix.external_dir %>/pdns_errors, <%= node.zabbix.external_dir %>/pdns_latency, <%= node.zabbix.external_dir %>/pdns_qsize, <%= node.zabbix.external_dir %>/pdns_queries
+
+# Disable syslog entries for ZABBIX_CMD_PDNS
+Defaults!ZABBIX_CMD_PDNS !syslog
+
+# ZABBIX special privileges
+zabbix ALL=NOPASSWD: ZABBIX_CMD_PDNS

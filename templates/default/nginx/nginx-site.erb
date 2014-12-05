@@ -1,5 +1,6 @@
 server {
-        listen   127.0.0.1:<%= node.zabbix_custom_checks.nginx.port %> default;
+
+        listen   [::1]:<%= node.zabbix_custom_checks.nginx.port %>;
 
         server_name localhost;
 

@@ -1,0 +1,8 @@
+# Zabbix configuration for running checks without password
+Cmnd_Alias ZABBIX_CMD_HWRAID_LSI_MEGARAID = /usr/sbin/megasasctl
+
+# Disable syslog entries for ZABBIX_CMD_HWRAID_ADAPTEC_AAC_RAID
+Defaults!ZABBIX_CMD_HWRAID_LSI_MEGARAID !syslog
+
+# ZABBIX special privileges
+zabbix ALL=NOPASSWD: ZABBIX_CMD_HWRAID_LSI_MEGARAID

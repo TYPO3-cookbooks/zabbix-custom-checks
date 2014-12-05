@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: zabbix-custom-checks
-# Recipe:: apache2
+# Recipe:: hwraid-lsi-megaraid
 #
 # Copyright 2012, Steffen Gebert / TYPO3 Association
 #
@@ -19,19 +19,13 @@
 
 include_recipe "zabbix-custom-checks::default"
 
-template "#{node.zabbix.agent.include_dir}/apache2.conf" do
-  source "apache2/apache2.conf.erb"
-  mode "644"
-  notifies :restart, "service[zabbix_agentd]"
-end
+template "#{node.zabbix.agent.include_dir}/hwraid-lsi-megaraid.conf" do
+	source "hwraid/lsi-megaraid.conf.erb"
+	mode "644"
+	notifies :restart, "service[zabbix_agentd]"
+end	
 
-template "#{node.zabbix.external_dir}/apache2_status.sh" do
-  source "apache2/apache2_status.sh.erb"
-  mode "755"
-end
-
-include_recipe "apache2::mod_status"
-
-web_app "server-status" do
-  template "apache2/web_app.conf.erb"
+template "/etc/sudoers.d/zabbix-hwraid-lsi-megaraid" do
+	source "hwraid/sudoers-lsi-megaraid.erb"
+	mode "440"
 end

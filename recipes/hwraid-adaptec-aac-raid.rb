@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: zabbix-custom-checks
-# Recipe:: apache2
+# Recipe:: hwraid-adaptec-aac-raid
 #
 # Copyright 2012, Steffen Gebert / TYPO3 Association
 #
@@ -19,19 +19,13 @@
 
 include_recipe "zabbix-custom-checks::default"
 
-template "#{node.zabbix.agent.include_dir}/apache2.conf" do
-  source "apache2/apache2.conf.erb"
-  mode "644"
-  notifies :restart, "service[zabbix_agentd]"
-end
+template "#{node.zabbix.agent.include_dir}/hwraid-adaptec-aac-raid.conf" do
+	source "hwraid/adaptec-aac-raid.conf.erb"
+	mode "644"
+	notifies :restart, "service[zabbix_agentd]"
+end	
 
-template "#{node.zabbix.external_dir}/apache2_status.sh" do
-  source "apache2/apache2_status.sh.erb"
-  mode "755"
-end
-
-include_recipe "apache2::mod_status"
-
-web_app "server-status" do
-  template "apache2/web_app.conf.erb"
+template "/etc/sudoers.d/zabbix-hwraid-adaptec-aac-raid" do
+	source "hwraid/sudoers-adaptec-aac-raid.erb"
+	mode "440"
 end

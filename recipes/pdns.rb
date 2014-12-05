@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: zabbix-custom-checks
-# Recipe:: apache2
+# Cookbook Name:: zabbix_custom_checks
+# Recipe:: pdns
 #
-# Copyright 2012, Steffen Gebert / TYPO3 Association
+# Copyright 2014, TYPO3 Association
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,19 +19,23 @@
 
 include_recipe "zabbix-custom-checks::default"
 
-template "#{node.zabbix.agent.include_dir}/apache2.conf" do
-  source "apache2/apache2.conf.erb"
+template "#{node.zabbix.agent.include_dir}/pdns.conf" do
+  source "pdns/zabbix.conf.erb"
   mode "644"
   notifies :restart, "service[zabbix_agentd]"
 end
 
-template "#{node.zabbix.external_dir}/apache2_status.sh" do
-  source "apache2/apache2_status.sh.erb"
-  mode "755"
+# custom monitoring scripts
+# these are taken from https://github.com/Rikbruggink/Zabbix-templates
+files = ["errors", "latency", "qsize", "queries"]
+files.each do |filename|
+  template "#{node.zabbix.external_dir}/pdns_#{filename}" do
+    source "pdns/pdns_#{filename}"
+    mode "755"
+  end
 end
 
-include_recipe "apache2::mod_status"
-
-web_app "server-status" do
-  template "apache2/web_app.conf.erb"
+template "/etc/sudoers.d/zabbix-pdns" do
+  source "pdns/sudoers.erb"
+  mode "440"
 end

@@ -1,0 +1,8 @@
+# Zabbix configuration for running checks without password
+Cmnd_Alias ZABBIX_CMD_HWRAID_ADAPTEC_AAC_RAID = /usr/sbin/arcconf GETCONFIG 1 AD
+
+# Disable syslog entries for ZABBIX_CMD_HWRAID_ADAPTEC_AAC_RAID
+Defaults!ZABBIX_CMD_HWRAID_ADAPTEC_AAC_RAID !syslog
+
+# ZABBIX special privileges
+zabbix ALL=NOPASSWD: ZABBIX_CMD_HWRAID_ADAPTEC_AAC_RAID
