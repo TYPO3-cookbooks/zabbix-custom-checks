@@ -18,3 +18,7 @@
 #
 
 include_recipe "zabbix"
+
+directory node.zabbix.external_dir do
+  action :create
+end
