@@ -7,6 +7,7 @@ server {
         location /nginx_status {
                 stub_status on;
                 access_log   off;
+                <% if Gem::Version.new(node['nginx']['version']) >= Gem::Version.new("0.8.22") %>allow ::1;<%- end %>
                 allow 127.0.0.1;
                 deny all;
         }
