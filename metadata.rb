@@ -5,7 +5,7 @@ license          "Apache 2.0"
 description      "Adds custom checks for Zabbix monitoring"
 long_description IO.read(File.join(File.dirname(__FILE__), "README.md"))
 
-version          "0.2.2"
+version          "0.2.3"
 
 recipe           "zabbix-custom-checks::apache2", "Monitors Apache2 status"
 recipe           "zabbix-custom-checks::apt-update-check", "Monitors for system software updates"
