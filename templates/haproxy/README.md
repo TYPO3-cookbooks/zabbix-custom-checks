@@ -12,6 +12,7 @@ This repo contains everything you need to discover and monitor HAProxy frontends
 
 ### Latest / Changelog
 
+* [01/20/2017]: replaced single XML template with two - one for Zabbix v2 and another for v3
 * [09/08/2015]: now all stats are retrieved via `haproxy_stats.sh` script, which caches the stats for 5 minutes (by default) to avoid hitting HAProxy stats socket too much.
 
 ### Prerequisites
@@ -19,7 +20,7 @@ This repo contains everything you need to discover and monitor HAProxy frontends
 * Zabbix Server >= 2.x (tested on 2.2 and 2.4)
 * Zabbix Frontend >= 2.x
 * HAProxy >= 1.3
-* Socat
+* Socat (when using sockets) or nc (when accessing haproxy status via tcp connection)
 
 ### Instructions
 
@@ -34,9 +35,9 @@ This repo contains everything you need to discover and monitor HAProxy frontends
 Include=/etc/zabbix/zabbix_agentd.d/
 ```
 * Place `haproxy_discovery.sh` into `/usr/local/bin/` directory and make sure it's executable (`sudo chmod +x /usr/local/bin/haproxy_discovery.sh`)
-* Import `haproxy_zbx_template.xml` template via Zabbix Web UI interface (provided by `zabbix-frontend-php` package)
+* Import appropriate `haproxy_zbx_v2_template.xml` or `haproxy_zbx_v3_template.xml` template via Zabbix Web UI interface (provided by `zabbix-frontend-php` package)
 * Configure HAProxy control socket
-  - [Configure HAProxy](http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#9.2) to listen on `/run/haproxy/info.sock`
+  - [Configure HAProxy](http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#9.2) to listen on `/var/run/haproxy/info.sock`
   - or set custom socket path in checks (set `{$HAPROXY_SOCK}` template macro to your custom socket path)
   - or update `userparameter_haproxy.conf` and `haproxy_discovery.sh` with your socket path
 * Customize your HAProxy config file location via `{$HAPROXY_CONFIG}` template macro, if necessary
@@ -45,7 +46,11 @@ Include=/etc/zabbix/zabbix_agentd.d/
 # haproxy read-only non-admin socket
 ## (user level permissions are required, admin level will work as well, though not necessary)
 global
-  stats socket /run/haproxy/info.sock  mode 666 level user
+  # default usage, through socket
+  stats socket /var/run/haproxy/info.sock  mode 666 level user
+  ## alternative usage, using tcp connection (useful e.g. when haproxy runs inside a docker and zabbix-agent in another)
+  ## replace socket path by ip:port combination on both scripts when using this approach, e.g. 172.17.0.1:9000
+  #stats socket *:9000
 
 ```
 
