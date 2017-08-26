@@ -1,3 +1,3 @@
-UserParameter=custom.apt-update-check.security,/usr/lib/update-notifier/apt-check 2>&1 | cut -f1 -d";"
-UserParameter=custom.apt-update-check.normal,/usr/lib/update-notifier/apt-check 2>&1 | cut -f2 -d";"
-UserParameter=custom.apt-update-check.list,/usr/lib/update-notifier/apt-check --package-names 2>&1
+UserParameter=custom.apt-update-check.security,apt-get --just-print upgrade | grep "Inst " | grep Debian-Security | wc -l
+UserParameter=custom.apt-update-check.normal,apt-get --just-print upgrade | grep "Inst " | wc -l
+UserParameter=custom.apt-update-check.list,apt-get --just-print upgrade | grep "Inst " | cut -d" " -f2
