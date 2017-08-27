@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "t3-zabbix::agent"
+include_recipe "zabbix"
 
 directory node.zabbix.external_dir do
   action :create
