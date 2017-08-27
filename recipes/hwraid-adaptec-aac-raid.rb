@@ -19,13 +19,13 @@
 
 include_recipe "zabbix-custom-checks::default"
 
-template "#{node.zabbix.agent.include_dir}/hwraid-adaptec-aac-raid.conf" do
-	source "hwraid/adaptec-aac-raid.conf.erb"
-	mode "644"
-	notifies :restart, "service[zabbix_agentd]"
-end	
+template "#{node['zabbix']['agent']['include_dir']}/hwraid-adaptec-aac-raid.conf" do
+  source "hwraid/adaptec-aac-raid.conf.erb"
+  mode "644"
+  notifies :restart, "service[zabbix_agentd]"
+end
 
 template "/etc/sudoers.d/zabbix-hwraid-adaptec-aac-raid" do
-	source "hwraid/sudoers-adaptec-aac-raid.erb"
-	mode "440"
+  source "hwraid/sudoers-adaptec-aac-raid.erb"
+  mode "440"
 end

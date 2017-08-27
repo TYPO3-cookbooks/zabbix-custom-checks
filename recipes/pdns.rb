@@ -19,7 +19,7 @@
 
 include_recipe "zabbix-custom-checks::default"
 
-template "#{node.zabbix.agent.include_dir}/pdns.conf" do
+template "#{node['zabbix']['agent']['include_dir']}/pdns.conf" do
   source "pdns/zabbix.conf.erb"
   mode "644"
   notifies :restart, "service[zabbix_agentd]"
@@ -29,7 +29,7 @@ end
 # these are taken from https://github.com/Rikbruggink/Zabbix-templates
 files = ["errors", "latency", "qsize", "queries"]
 files.each do |filename|
-  template "#{node.zabbix.external_dir}/pdns_#{filename}" do
+  template "#{node['zabbix']['external_dir']}/pdns_#{filename}" do
     source "pdns/pdns_#{filename}"
     mode "755"
   end

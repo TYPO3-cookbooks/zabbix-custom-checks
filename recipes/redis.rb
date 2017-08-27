@@ -9,7 +9,7 @@
 
 include_recipe "zabbix-custom-checks::default"
 
-template "#{node.zabbix.agent.include_dir}/redis.conf" do
+template "#{node['zabbix']['agent']['include_dir']}/redis.conf" do
   source "redis/zabbix.conf.erb"
   mode "644"
   notifies :restart, "service[zabbix_agentd]"
