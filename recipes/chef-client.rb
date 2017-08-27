@@ -28,6 +28,6 @@ end
 
 # We register ourself as a report handler, which runs at the end of chef run
 chef_handler "Zabbix::Report" do
-  source "#{node.chef_handler.handler_path}/zabbix-report.rb"
+  source "#{node['chef_handler']['handler_path']}/zabbix-report.rb"
   action :enable
 end

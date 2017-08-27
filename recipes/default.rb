@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe "t3-zabbix::agent"
-
-directory node.zabbix.external_dir do
-  action :create
+directory node['zabbix']['external_dir'] do
+  recursive true
 end

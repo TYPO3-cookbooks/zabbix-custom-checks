@@ -21,7 +21,7 @@ include_recipe "zabbix-custom-checks::default"
 
 package "socat"
 
-template "#{node.zabbix.agent.include_dir}/haproxy.conf" do
+template "#{node['zabbix']['agent']['include_dir']}/haproxy.conf" do
   source "haproxy/userparameter_haproxy.conf.erb"
   mode "644"
   notifies :restart, "service[zabbix_agentd]"
