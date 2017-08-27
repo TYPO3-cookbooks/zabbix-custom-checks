@@ -17,4 +17,6 @@
 # limitations under the License.
 #
 
-directory node['zabbix']['external_dir']
+directory node['zabbix']['external_dir'] do
+  recursive true
+end
