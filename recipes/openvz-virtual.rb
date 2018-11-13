@@ -13,7 +13,7 @@ include_recipe "sudo"
 template "#{node['zabbix']['agent']['include_dir']}/openvz-virtual.conf" do
   source "openvz/virtual/zabbix.conf.erb"
   mode "644"
-  notifies :restart, "service[zabbix_agentd]" if Dir.exist?("#{node['zabbix']['agent']['include_dir']}")
+  notifies :restart, "service[zabbix_agentd]" if File.exist?("#{node['zabbix']['install_dir']}/zabbix_agentd")
 end
 
 # custom monitoring scripts

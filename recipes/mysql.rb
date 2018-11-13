@@ -22,5 +22,5 @@ include_recipe "zabbix-custom-checks::default"
 template "#{node['zabbix']['agent']['include_dir']}/mysql.conf" do
   source "mysql/mysql.conf.erb"
   mode "644"
-  notifies :restart, "service[zabbix_agentd]" if Dir.exist?("#{node['zabbix']['agent']['include_dir']}")
+  notifies :restart, "service[zabbix_agentd]" if File.exist?("#{node['zabbix']['install_dir']}/zabbix_agentd")
 end

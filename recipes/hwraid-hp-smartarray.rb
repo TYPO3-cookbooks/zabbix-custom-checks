@@ -22,7 +22,7 @@ include_recipe "zabbix-custom-checks::default"
 template "#{node['zabbix']['agent']['include_dir']}/hwraid-hp-smartarray.conf" do
   source "hwraid/hp-smartarray.conf.erb"
   mode "644"
-  notifies :restart, "service[zabbix_agentd]"
+  notifies :restart, "service[zabbix_agentd]" if File.exist?("#{node['zabbix']['install_dir']}/zabbix_agentd")
 end
 
 template "/etc/sudoers.d/zabbix-hwraid-hp-smartarray" do
