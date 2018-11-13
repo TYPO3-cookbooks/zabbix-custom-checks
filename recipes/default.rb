@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+directory node['zabbix']['agent']['include_dir'] do
+  recursive true
+end
+
 directory node['zabbix']['external_dir'] do
   recursive true
 end

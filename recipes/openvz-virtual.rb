@@ -13,9 +13,7 @@ include_recipe "sudo"
 template "#{node['zabbix']['agent']['include_dir']}/openvz-virtual.conf" do
   source "openvz/virtual/zabbix.conf.erb"
   mode "644"
-  # This doesn't work while testing the "t3-openvz" cookbook.
-  # Don't know how to fix it, so I'm ignoring the service restart...
-  #notifies :restart, "service[zabbix_agentd]"
+  notifies :restart, "service[zabbix_agentd]" if Dir.exist?("#{node['zabbix']['agent']['include_dir']}")
 end
 
 # custom monitoring scripts
