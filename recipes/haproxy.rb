@@ -24,7 +24,7 @@ package "socat"
 template "#{node['zabbix']['agent']['include_dir']}/haproxy.conf" do
   source "haproxy/userparameter_haproxy.conf.erb"
   mode "644"
-  notifies :restart, "service[zabbix_agentd]"
+  notifies :restart, "service[zabbix_agentd]" if File.exist?("#{node['zabbix']['install_dir']}/zabbix_agentd")
 end
 
 template "#{node.zabbix.external_dir}/haproxy_stats.sh" do

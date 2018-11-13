@@ -22,7 +22,7 @@ include_recipe "zabbix-custom-checks::default"
 template "#{node['zabbix']['agent']['include_dir']}/apache2.conf" do
   source "apache2/apache2.conf.erb"
   mode "644"
-  notifies :restart, "service[zabbix_agentd]"
+  notifies :restart, "service[zabbix_agentd]" if File.exist?("#{node['zabbix']['install_dir']}/zabbix_agentd")
 end
 
 template "#{node['zabbix']['external_dir']}/apache2_status.sh" do
