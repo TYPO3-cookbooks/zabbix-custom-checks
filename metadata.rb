@@ -26,3 +26,6 @@ recipe           "zabbix-custom-checks::varnish", "Monitors Varnish status"
 # depends          "nginx"
 depends          "sudo"
 depends          "zabbix"
+
+# For compatibility with Chef 12.x
+depends          "seven_zip",    "< 3.0.0"
