@@ -1,0 +1,21 @@
+<% if node['platform'] == 'debian' && node['lsb']['codename'] == 'jessie' %>
+### Set of parameters for monitoring MySQL server (v3.23.42 and later)
+UserParameter=mysql.ping,	sudo mysqladmin -u root ping|grep alive|wc -l
+UserParameter=mysql.uptime,	sudo mysqladmin -u root status|cut -f2 -d":"|cut -f2 -d" "
+UserParameter=mysql.threads,	sudo mysqladmin -u root status|cut -f3 -d":"|cut -f2 -d" "
+UserParameter=mysql.questions,	sudo mysqladmin -u root status|cut -f4 -d":"|cut -f2 -d" "
+UserParameter=mysql.slowqueries,sudo mysqladmin -u root status|cut -f5 -d":"|cut -f2 -d" "
+UserParameter=mysql.qps,	sudo mysqladmin -u root status|cut -f9 -d":"|cut -f2 -d" "
+UserParameter=mysql.version,mysql -V
+UserParameter=version.mysql,mysql -V
+<% else %>
+### Set of parameters for monitoring MySQL server (v3.23.42 and later)
+UserParameter=mysql.ping,	sudo mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf -u debian-sys-maint ping|grep alive|wc -l
+UserParameter=mysql.uptime,	sudo mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf -u debian-sys-maint status|cut -f2 -d":"|cut -f2 -d" "
+UserParameter=mysql.threads,	sudo mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf -u debian-sys-maint status|cut -f3 -d":"|cut -f2 -d" "
+UserParameter=mysql.questions,	sudo mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf -u debian-sys-maint status|cut -f4 -d":"|cut -f2 -d" "
+UserParameter=mysql.slowqueries,sudo mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf -u debian-sys-maint status|cut -f5 -d":"|cut -f2 -d" "
+UserParameter=mysql.qps,	sudo mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf -u debian-sys-maint status|cut -f9 -d":"|cut -f2 -d" "
+UserParameter=mysql.version,mysql -V
+UserParameter=version.mysql,mysql -V
+<% end %>
