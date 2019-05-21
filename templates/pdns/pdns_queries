@@ -15,12 +15,12 @@
 
 command="/usr/bin/pdns_control list"
 
-if [ "$1" = "autoconf" ]; then
+if [[ "$1" = "autoconf" ]]; then
         echo yes
         exit 0
 fi
 
-if [ "$1" = "config" ]; then
+if [[ "$1" = "config" ]]; then
         echo 'graph_title Power DNS queries'
         echo 'graph_args -l 0 --base 1000'
         echo 'graph_vlabel numbers of'
@@ -53,5 +53,4 @@ if [ "$1" = "config" ]; then
         exit 0
 fi
 
-
-$command | sed 's/=\([0-9]\+\),/.value \1\n/g' | grep udp-'\|'recursing'\|'tcp | sed 's/-/_/g'
+${command} | sed 's/=\([0-9]\+\),/.value \1\n/g' | grep udp-'\|'recursing'\|'tcp | sed 's/-/_/g'

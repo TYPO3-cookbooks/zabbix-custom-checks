@@ -15,12 +15,12 @@
 
 command="/usr/bin/pdns_control show"
 
-if [ "$1" = "autoconf" ]; then
+if [[ "$1" = "autoconf" ]]; then
         echo yes
         exit 0
 fi
 
-if [ "$1" = "config" ]; then
+if [[ "$1" = "config" ]]; then
         echo 'graph_title Power DNS database queue'
         echo 'graph_args -l 0'
         echo 'graph_vlabel number of waiting queries'
@@ -32,5 +32,5 @@ if [ "$1" = "config" ]; then
         exit 0
 fi
 
-echo "qsize.value $($command qsize-q)"
+echo "qsize.value $(${command} qsize-q)"
 
