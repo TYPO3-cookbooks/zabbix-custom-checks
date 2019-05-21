@@ -13,7 +13,7 @@
 # https://github.com/Rikbruggink/Zabbix-templates
 # rev 5098005dfd70d91c4f11195f26f5166e981cc24f
 
-command="/etc/init.d/pdns show"
+command="/usr/bin/pdns_control show"
 
 if [ "$1" = "autoconf" ]; then
         echo yes

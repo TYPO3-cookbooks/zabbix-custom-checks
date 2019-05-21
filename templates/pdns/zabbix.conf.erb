@@ -16,8 +16,8 @@ UserParameter=custom.pdns_qsize.qsize, sudo <%= node[:zabbix][:external_dir] %>/
  
 UserParameter=custom.pdns_queries.recursing_answers, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'recursing_answers'|cut -f2 -d" "
 UserParameter=custom.pdns_queries.recursing_questions, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'recursing_questions'|cut -f2 -d" "
-UserParameter=custom.pdns_queries.tcp_answers, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'tcp_answers'|cut -f2 -d" "
+UserParameter=custom.pdns_queries.tcp_answers, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'tcp_answers.value'|cut -f2 -d" "
 UserParameter=custom.pdns_queries.tcp_queries, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'tcp_queries'|cut -f2 -d" "
-UserParameter=custom.pdns_queries.udp_answers, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'udp_answers'|cut -f2 -d" "
+UserParameter=custom.pdns_queries.udp_answers, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'udp_answers.value'|cut -f2 -d" "
 UserParameter=custom.pdns_queries.udp_queries, sudo <%= node[:zabbix][:external_dir] %>/pdns_queries|grep 'udp_queries'|cut -f2 -d" "
 
