@@ -13,14 +13,14 @@
 # https://github.com/Rikbruggink/Zabbix-templates
 # rev 5098005dfd70d91c4f11195f26f5166e981cc24f
 
-command="/etc/init.d/pdns show"
+command="/usr/bin/pdns_control show"
 
-if [ "$1" = "autoconf" ]; then
+if [[ "$1" = "autoconf" ]]; then
         echo yes
         exit 0
 fi
 
-if [ "$1" = "config" ]; then
+if [[ "$1" = "config" ]]; then
         echo 'graph_title Power DNS latency'
         echo 'graph_args -l 0'
         echo 'graph_vlabel usec'
@@ -32,7 +32,4 @@ if [ "$1" = "config" ]; then
         exit 0
 fi
 
-
-
-
-echo "latency.value $($command latency | awk -F= '{print $2}')"
+echo "latency.value $(${command} latency | awk -F= '{print $2}')"
